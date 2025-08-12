@@ -18,7 +18,7 @@ from dependency_injection import deps
 T = TypeVar(name="T")
 
 
-class NN(AbstractModel):
+class IMAGE_CLASSIFICATION_MODEL(AbstractModel):
     def __init__(self) -> None:
         # Initializing a final layer for distribution
         """
@@ -44,8 +44,8 @@ def main():
     y_sample = training_data["y_sample"]
     y_test = training_data["y_test"]
 
-    NN().train_model(Image_sample, y_sample)
-    NN().evaluate(Image_test_sample, y_test)
+    IMAGE_CLASSIFICATION_MODEL().train_model(Image_sample, y_sample)
+    IMAGE_CLASSIFICATION_MODEL().evaluate(Image_test_sample, y_test)
     pass
 
 
