@@ -1,0 +1,7 @@
+.venv
+*/__pycache__
+__pycache__
+data
+.vscode
+training_data.npy
+Pipfile
