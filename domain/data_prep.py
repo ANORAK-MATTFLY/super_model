@@ -9,7 +9,6 @@ import numpy as np
 REBUILD_DATA = False
 
 BASE_DIR = "./deep_learning/neural_nets"
-# print(os.listdir("./data/"))
 
 
 class DataPrep:

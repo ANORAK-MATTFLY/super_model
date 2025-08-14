@@ -1,5 +1,4 @@
 from typing_extensions import override
-import torch.nn as nn
 from torch._tensor import Tensor
 import torch as tf
 
@@ -27,6 +26,7 @@ class IMAGE_CLASSIFICATION_MODEL(AbstractModel):
         The 50 by 50 represents the size of images within the batch of data.
         """
         self.conv: NeuralNetWorkWithPytorch = deps["conv_nn"]
+        self.conv.to(device=tf.device("cuda" if tf.cuda.is_available() else "cpu"))
 
     @override
     def train_model(self, Image_sample: Tensor, y_sample: Tensor):
@@ -39,11 +39,18 @@ class IMAGE_CLASSIFICATION_MODEL(AbstractModel):
 
 def main():
     training_data = DataPrep().data_sampling("./training_data.npy")
-    Image_sample = training_data["Image_sample"]
-    Image_test_sample = training_data["Image_test_sample"]
-    y_sample = training_data["y_sample"]
-    y_test = training_data["y_test"]
-
+    Image_sample = training_data["Image_sample"].to(
+        device=tf.device("cuda" if tf.cuda.is_available() else "cpu")
+    )
+    Image_test_sample = training_data["Image_test_sample"].to(
+        device=tf.device("cuda" if tf.cuda.is_available() else "cpu")
+    )
+    y_sample = training_data["y_sample"].to(
+        device=tf.device("cuda" if tf.cuda.is_available() else "cpu")
+    )
+    y_test = training_data["y_test"].to(
+        device=tf.device("cuda" if tf.cuda.is_available() else "cpu")
+    )
     IMAGE_CLASSIFICATION_MODEL().train_model(Image_sample, y_sample)
     IMAGE_CLASSIFICATION_MODEL().evaluate(Image_test_sample, y_test)
     pass
