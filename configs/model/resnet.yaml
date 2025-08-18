@@ -1,0 +1,5 @@
+# @package _group_
+name: resnet18          # Unique name for the model factory
+params:
+  pretrained: true
+  num_classes: ${dataset.params.num_classes} # Interpolate from dataset config

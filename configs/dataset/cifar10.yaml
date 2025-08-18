@@ -1,0 +1,6 @@
+# @package _group_
+name: cifar10
+path: "data/processed/cifar10"
+params:
+  num_classes: 10
+  image_size: 32

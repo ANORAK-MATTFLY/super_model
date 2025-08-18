@@ -1,0 +1,27 @@
+# @package _global_
+defaults:
+  - model: resnet
+  - dataset: cifar10
+  - override hydra/job_logging: colorlog
+  - override hydra/hydra_logging: colorlog
+
+
+# Global training parameters
+training:
+  learning_rate: 0.001
+  batch_size: 64
+  epochs: 5
+  device: "cuda"
+
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+
+# Experiment tracking config (e.g., for MLflow)
+tracking:
+  uri: "mlruns"
+  # experiment_name: "cifar10_experiments"
+  experiment_name: "cifar10_multimodel"
+
+

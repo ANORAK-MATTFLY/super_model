@@ -1,0 +1,6 @@
+# @package _group_
+name: vit_b_16
+params:
+  image_size: 224
+  pretrained: true
+  num_classes: ${dataset.params.num_classes}
