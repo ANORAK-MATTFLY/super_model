@@ -1,7 +1,8 @@
 env
 */__pycache__
 __pycache__
-data/*
+data/raw/*
+data/processed/*
 .vscode
 training_data.npy
-Pipfile
+image_training_data.npy

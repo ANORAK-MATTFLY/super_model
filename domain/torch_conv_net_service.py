@@ -100,9 +100,10 @@ class NeuralNetWorkWithPytorch(
         loss_func: MSELoss = nn.MSELoss()
 
         BATCH_SIZE = 100
-        EPOCHS = 2
+        EPOCHS = 9
         loss = 0
-        for _ in range(EPOCHS):
+        for idx in range(EPOCHS):
+            print("Epoch:", idx)
             for index in tqdm(range(0, len(Image_sample), BATCH_SIZE)):
                 batch_images = Image_sample[index : index + BATCH_SIZE].view(
                     -1, 1, 50, 50
