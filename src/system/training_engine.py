@@ -1,10 +1,13 @@
 import torch
 from torch.utils import data
 from ..models.interfaces.interface import IModel
+import mlflow
+import mlflow.pytorch
+from omegaconf import DictConfig, OmegaConf
 
 
 class TrainingEngine:
-    def __init__(self, model: IModel, dataloader: data.DataLoader, config: dict):
+    def __init__(self, model: IModel, dataloader: data.DataLoader, config: DictConfig):
         self.model = model
         self.dataloader = dataloader
         self.config = config["training"]
@@ -48,7 +51,7 @@ class TrainingEngine:
             flat_config = OmegaConf.to_container(
                 self.config, resolve=True, throw_on_missing=True
             )
-            mlflow.log_params(flat_config)
+            # mlflow.log_params(flat_config)
 
             self.model.to(self.device)
             for epoch in range(self.config["training"]["epochs"]):
@@ -60,9 +63,9 @@ class TrainingEngine:
                 mlflow.log_metric("train_accuracy", avg_accuracy, step=epoch)
 
             # Log the trained model to the MLflow Model Registry
-            mlflow.pytorch.log_model(
-                pytorch_model=self.model,
-                artifact_path="model",
-                registered_model_name=self.model.name,  # Registers a new version under this name
-            )
+            # mlflow.pytorch.log_model(
+            #     pytorch_model=self.model,
+            #     artifact_path="model",
+            #     registered_model_name=self.model.name,  # Registers a new version under this name
+            # )
         print("--- Training Finished & Logged to MLflow ---")

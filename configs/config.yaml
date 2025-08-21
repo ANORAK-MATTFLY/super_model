@@ -8,10 +8,12 @@ defaults:
 
 # Global training parameters
 training:
-  learning_rate: 0.001
-  batch_size: 64
-  epochs: 5
-  device: "cuda"
+  - name: cats_and_dogs
+  - path: "../data/raw/train/train/"
+  - learning_rate: 0.001
+  - batch_size: 64
+  - epochs: 5
+  - device: "cuda"
 
 hydra:
   run:
